@@ -1,7 +1,9 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-
+import { headers } from 'next/headers';
 export default function Home() {
+  const currentLocale =  headers().get('current-locale');
+  ;
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -14,6 +16,7 @@ export default function Home() {
           priority
         />
         <ol>
+          <li>Current Locale: {currentLocale}</li>
           <li>
             Get started by editing <code>src/app/page.tsx</code>.
           </li>
