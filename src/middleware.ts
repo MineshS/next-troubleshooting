@@ -1,10 +1,16 @@
-import { NextRequest, NextResponse } from "next/server"
-const setLocale = (request: NextRequest, response:NextResponse) => {
-  response.headers.set('current-locale', 'en');  
-  return response;
-}
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+ 
+export function middleware(request: NextRequest) {
 
-export async function middleware(request: NextRequest)
-{
-    return setLocale(request, NextResponse.next());
+  const reqHeaders = new Headers(request.headers)
+  reqHeaders.set('current-locale', 'custom')
+ 
+  const response = NextResponse.next({
+    request: {
+      headers: reqHeaders
+    }
+  })
+
+  return response
 }
